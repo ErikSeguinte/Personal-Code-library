@@ -28,16 +28,16 @@ class linked_list(object):
             self.tail = new_head
         self.head = new_head
 
-    def popleft(self):
-        node = self.head
+    def popright(self):
+        node = self.tail
 
         if node:
-            nxt = node.next_node
+            prev = node.prev_node
 
-            # Additional list remains. Next node is now the new head.
-            if nxt:
-                nxt.prev_node = None
-                self.head = nxt
+            # Additional list remains. Next node is now the new tail
+            if prev:
+                prev.next_node = None
+                self.tail = prev
 
             # empty list. Reset tail and head to None
             else:
@@ -123,4 +123,4 @@ if __name__ == "__main__":
 
     l.remove(4)
     for i in xrange(9):
-        print(l.popleft())
+        print(l.popright())

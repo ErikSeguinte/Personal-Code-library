@@ -2,13 +2,13 @@
 #include<cstdlib>
 
 template<typename T>
-class stack {
+class queue {
 
   public:
-    stack();
-    stack(int initSize);
-    stack(stack &original);
-    ~stack();
+    queue();
+    queue(int initSize);
+    queue(queue &original);
+    ~queue();
     void push(T item);
     T pop();
     int getSize();
@@ -23,17 +23,17 @@ class stack {
 
 
 template<typename T>
-stack<T>::stack(): stack(1) {}
+queue<T>::queue(): queue(1) {}
 
 template<typename T>
-stack<T>::stack(int initSize) {
+queue<T>::queue(int initSize) {
   size = initSize;
   array = new T[size];
   filled_elements = 0;
 }
 
 template<typename T>
-void stack<T>::push(T item) {
+void queue<T>::push(T item) {
   if (filled_elements == size){
     int newSize = size * 2;
     resize(newSize);
@@ -44,7 +44,7 @@ void stack<T>::push(T item) {
 }
 
 template<typename T>
-T stack<T>::pop(){
+T queue<T>::pop(){
   // if (filled_elements == 0) {
   //   return NULL;
   // }
@@ -57,7 +57,7 @@ T stack<T>::pop(){
 }
 
 template<typename T>
-void stack<T>::resize(int newSize){
+void queue<T>::resize(int newSize){
   T *temp = nullptr;
   temp = new T[newSize];
 
@@ -70,17 +70,17 @@ void stack<T>::resize(int newSize){
 }
 
 template<typename T>
-stack<T>::~stack() {
+queue<T>::~queue() {
   delete array;
 }
 
 template<typename T>
-int stack<T>::getSize(){
+int queue<T>::getSize(){
   return size;
 }
 
 template<typename T>
-void stack<T>::print(){
+void queue<T>::print(){
   for (int i=0; i < size; i++){
     std::cout << *(array + i) << ' ';
   }
