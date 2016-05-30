@@ -16,7 +16,9 @@ def selection_sort(array):
             sort_helper.exchange(array, i, min_position)
 
     return array
-sort_helper.test_sort(selection_sort, 3)
+
+if __name__ == "__main__":
+    sort_helper.test_sort(selection_sort, 3)
             
 
 

@@ -23,12 +23,17 @@ def is_sorted(l):
 
     return True
 
-def test_sort(sort_function, size = 10):
-    test = [i for i in xrange(size)]
-    random.shuffle(test)
-    print(test)
+def test_sort(sort_function, size = 10, seq = None, toPrint = True):
+    if seq:
+        test = seq
+    else:
+        test = [i for i in xrange(size)]
+        random.shuffle(test)
+    if toPrint:
+        print(test)
     test= sort_function(test)
-    print(test)
+    if toPrint:
+        print(test)
     assert(is_sorted(test))
 
 if __name__ == "__main__":
