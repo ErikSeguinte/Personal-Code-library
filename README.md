@@ -12,3 +12,4 @@ Dynamically resizing array, implemented in C++. Also uses templates to create ge
 
 ## Union Find
 Connects disjointed sets, and tests for connectedness. Implements weighted union-find with recursive path-compression
+Tested against largeUF.txt from [Algorithms, 4th edition][http://algs4.cs.princeton.edu/15uf/] with 1,000,000 nodes and millions of connections.
