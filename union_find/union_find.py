@@ -30,25 +30,17 @@ class UF(object):
 
     def find(self, p):
         """ Return representation of node.
-        """
-        prev = p
-        current = self.uf[p]
-        
-        while prev != current:
-            temp = self.uf[current]
-            prev = current
-            current = temp
-        
-        pRoot = current
 
-        # Path Compression.
-        prev = p
-        current = self.uf[p]
+        Recursive implementation, also applies path compression.
+        """
+
+        if p == self.uf[p]:
+            return p
+
+        pRoot = self.find(self.uf[p])
         
-        while current != pRoot:
-            temp = self.uf[current]
-            self.uf[current] = pRoot
-            current = temp
+        # Path Compression.
+        self.uf[p] = pRoot        
 
         return pRoot
 

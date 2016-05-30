@@ -9,3 +9,6 @@ String to integer function.
 
 ## resizing array
 Dynamically resizing array, implemented in C++. Also uses templates to create generic classes
+
+## Union Find
+Connects disjointed sets, and tests for connectedness. Implements weighted union-find with recursive path-compression
