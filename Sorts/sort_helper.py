@@ -36,6 +36,22 @@ def test_sort(sort_function, size = 10, seq = None, toPrint = True):
         print(test)
     assert(is_sorted(test))
 
+
+def test_class(sort_class, size = 10, seq = None, toPrint = True):
+    if seq:
+        test = seq
+    else:
+        test = [i for i in xrange(size)]
+        random.shuffle(test)
+    if toPrint:
+        print(test)
+    my_sort = sort_class(test)
+    test = my_sort.sort()
+    if toPrint:
+        print(test)
+    assert(is_sorted(test))
+
+
 if __name__ == "__main__":
     ls = [1,2,3]
 

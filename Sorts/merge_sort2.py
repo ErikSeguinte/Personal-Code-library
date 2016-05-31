@@ -34,10 +34,33 @@ class merge_sort(object):
                 self.array[i] = self.aux[left]
                 left += 1
 
+
+    def insertion_sort(self, low, high):
+
+        for i in xrange(low, high + 1):
+            value = self.array[i]
+            shift_made = False
+            empty_position = None
+            for j in reversed(xrange(1,i+1)):
+                if less(value, self.array[j-1]):
+                    #  Shift larger values to the right instead of doing full exchanges. Cuts array access in half.
+                    self.array[j] = self.array[j-1]
+                    shift_made = True
+                    empty_position = j-1
+                else:
+                    break
+            #  insert original value into position
+            if shift_made:
+                self.array[empty_position] = value
+                    
+
     def m_sort(self, low=0, high= None):
         # base case. Pointers overlap. Nothing to sort.
         if high is None:
             high = len(self.array) - 1
+        if high - low < 15:
+            self.insertion_sort(low, high)
+            return
         if high <= low:
             return
 
