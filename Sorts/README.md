@@ -32,6 +32,7 @@ Similar to insertion sort, except sorts intervals of the original array as if th
 *  N=1000 x 100, 0.366s
 *  N=10000 x 1, 0.0645s
 *  N=100000 x 5, 5.07
+*  N=100000 x 5, with 100x duplicates, 4.08s
 *  N = 1000, run 10 times, t = 0.017
 *  N = 10000, run 3 times, t = 0.08s
 *  N = 100000, run 3 times, t = 1.70s
@@ -46,4 +47,16 @@ Recursive Divide and conquer solution. Split problem in half until sub list is s
 *  N=1000 x 100, 0.200s
 *  N=10000 x 1, 0.0265s
 *  N=100000 x 5, 1.67s
+*  N=100000 x 5, with 100x duplicates, 1.64s
+
+
+## Quicksort
+Recursive, using pivot points. Makes use of median of 3 to pivot
+
+### Analysis
+*  N lg N
+*  N^2 Worst case.
+*  Generally faster than merge sort, especially with many duplicates
+*  N=100000 x 5, 1.07s
+*  N=100000 x 5, with 100x duplicates, 0.457
 

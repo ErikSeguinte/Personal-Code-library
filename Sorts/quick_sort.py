@@ -13,12 +13,18 @@ def quicksort(array, begin=0, end= None):
     if end is None:
         end = len(array)-1
 
-    if end <= begin:
+    if end <= begin + 10:
+        array[begin:end+1] =insertion_sort.my_sort(array[begin:end+1])
         return
 
+
     pivot = partition(array, begin, end)
-    quicksort(array, 0, pivot -1)
-    quicksort(array, pivot+1, end)
+    if pivot <= (begin+end)//2:
+        quicksort(array, 0, pivot -1)
+        quicksort(array, pivot+1, end)
+    else:
+        quicksort(array, pivot+1, end)
+        quicksort(array, 0, pivot -1)
     
 def partition(array, begin, end):
     m = median_of_three(array, begin, end)
@@ -30,7 +36,7 @@ def partition(array, begin, end):
 
 
     while True:
-        while array[i] <= value:
+        while array[i] < value:
             i += 1
             if i >= end:
                 break
@@ -57,5 +63,5 @@ def median_of_three(array, begin, end):
         return begin if m[0] < m[2] else end
 
 if __name__ == "__main__":
-    test_sort(my_sort,size = 500, toPrint = False )
+    test_sort(my_sort, toPrint = True, size= 10000 )
 

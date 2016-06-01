@@ -1,6 +1,6 @@
 import __future__
 import timeit, random
-import insertion_sort, selection_sort, shell_sort
+import insertion_sort, selection_sort, shell_sort, quick_sort
 import merge_sort
 import sort_helper
 
@@ -10,11 +10,12 @@ sorts = [
         #  insertion_sort.my_sort,
         shell_sort.my_sort,
         merge_sort.my_sort,
+        quick_sort.my_sort
         ]
             
 
 def time_sort():
-    N = 100000
+    N = 1000
     array = [x for x in xrange(N)]
     random.shuffle(array)
     def wrap_sort(my_sort, array):
