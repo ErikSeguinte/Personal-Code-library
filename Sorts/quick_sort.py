@@ -7,13 +7,13 @@ def my_sort(array):
     #random.shuffle(array)
 
     quicksort(array)
-    return insertion_sort.my_sort(array)
+    return array
 
 def quicksort(array, begin=0, end= None):
     if end is None:
         end = len(array)-1
 
-    if begin + 10 > end:
+    if end <= begin:
         return
 
     pivot = partition(array, begin, end)
@@ -22,21 +22,39 @@ def quicksort(array, begin=0, end= None):
     
 def partition(array, begin, end):
     m = median_of_three(array, begin, end)
-    p = begin
-    for i in xrange(begin, end +1):
-        if i == m:
-            continue
-        if array[i] <= array[begin]:
-            p +=1
-            array[i], array[p] = array[p], array[i]
-    array[m], array[p] = array[p], array[m]
-    return p
+    array[begin], array[m] = array[m], array[begin]
+    array[begin]
+    value = array[begin]
+    i = begin+1
+    j = end
+
+
+    while True:
+        while array[i] <= value:
+            i += 1
+            if i >= end:
+                break
+        while array[j] > value:
+            j -= 1
+            if j<= begin+1:
+                break
+        if i >= j:
+            break
+        array[i], array[j] = array[j], array[i]
+
+    array[begin], array[j] = array[j], array[begin]
+    return j
+
+
+        
 
 def median_of_three(array, begin, end):
-    m = [array[begin], array[begin+(end-begin)//2], array[end]]
-    m.remove(min(m))
-    m.remove(max(m))
-    return m[0]
+    mid = (begin + end) //2
+    m = [array[begin], array[mid], array[end]]
+    if m[0] < m[1]:
+        return mid if m[1] > m[2] else end
+    else:
+        return begin if m[0] < m[2] else end
 
 if __name__ == "__main__":
     test_sort(my_sort,size = 500, toPrint = False )
