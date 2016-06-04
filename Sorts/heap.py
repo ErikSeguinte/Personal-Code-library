@@ -2,7 +2,7 @@ import __future__
 
 class Heap(object):
 
-    def __init__(self, key = None, initial = None):
+    def __init__(self, initial = None, key = None, ):
         self.data = [None]
         self.key = key
         if initial:
@@ -10,12 +10,12 @@ class Heap(object):
             self.orderHeap()
 
 
-    def orderHeap(self):
+    def orderHeap(self, N = None):
         #  Restore heap order on random ordering. Can start half way back, as we can skip sub-heaps of size 1.
 
-        N = len(self.data) -1
+        if not N:
+            N = len(self.data) -1
         N = N//2
-
         for k in xrange(N, 0, -1):
             self.sink(k)
 
@@ -37,18 +37,20 @@ class Heap(object):
             self.swap(k, k//2)
             k = k//2
 
-    def sink(self, k):
+    def sink(self, k, N=None):
         """ Restore heap order by sinking down when k is smaller than one of it's children
         """
 
-        while (2*k) < len(self.data ) -1:
+        if not N:
+            N = len(self.data) - 1
+        while (2*k) <= N:
             
             # get left child
             j = k*2
 
 
             # Get right child if larger
-            if j < len(self.data) and self.less(j, j + 1):
+            if j < N and self.less(j, j + 1):
                 j += 1
 
             if not self.less(k, j):

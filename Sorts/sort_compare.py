@@ -1,7 +1,7 @@
 import __future__
 import timeit, random
-import insertion_sort, selection_sort, shell_sort, quick_sort
-import merge_sort
+import insertion_sort, selection_sort, shell_sort, quick_sort2
+import merge_sort, heap_sort
 import sort_helper
 
 
@@ -10,12 +10,13 @@ sorts = [
         #  insertion_sort.my_sort,
         shell_sort.my_sort,
         merge_sort.my_sort,
-        quick_sort.my_sort
+        quick_sort2.my_sort,
+        heap_sort.my_sort
         ]
             
 
 def time_sort():
-    N = 1000
+    N = 10000
     array = [x for x in xrange(N)]
     random.shuffle(array)
     def wrap_sort(my_sort, array):
@@ -27,9 +28,9 @@ def time_sort():
     for my_sort in sorts:
         print(my_sort.func_name)
         wrapped = wrap_sort(my_sort, array)
-        print(timeit.timeit(wrapped, number = 5))
-        print(timeit.timeit(wrapped, number = 5))
-        print(timeit.timeit(wrapped, number = 5))
+        print(timeit.timeit(wrapped, number = 100))
+        print(timeit.timeit(wrapped, number = 100))
+        print(timeit.timeit(wrapped, number = 100))
 
 
 
