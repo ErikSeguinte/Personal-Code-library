@@ -4,12 +4,25 @@ import st, frequencyCounter
 
 class Node(object):
 
-    def __init__(self, key, value, N=1, left = None, right = None):
+    def __init__(self, key, value, N=1, color = True, left = None, right = None):
         self.key = key
         self.value = value
         self.left = left
         self.right = right
+        self.color = color
         self.N = N
+
+    def color_black(self):
+        self.color = False
+
+    def color_red(self):
+        self.color = True
+
+    def filp_color(self):
+        self.color_red()
+        self.left.color_black()
+        self.right.color_black()
+
 
 class BST(st.ST):
 
@@ -21,6 +34,13 @@ class BST(st.ST):
         if value is None:
             value = key
         self.root = self.insert(self.root, key, value)
+        self.root.color_black
+
+    def is_red(self, node):
+        if node is None:
+            return False
+        else:
+            return node.color
 
     def insert(self, node, key, value):
 
@@ -33,9 +53,40 @@ class BST(st.ST):
             node.left = self.insert(node.left, key, value)
         else:
             node.value = value
+            
+        if self.is_red(node.right) and not self.is_red(node.left):
+            # Right leaning red link. Rotate to the left.
+            node =self.rotate_left(node)
+        if self.is_red(node.left) and (node.left and self.is_red(node.left.left)):
+            # 2 red links. Rotate to the right
+            node =self.rotate_right(node)
+        if self.is_red(node.left) and self.is_red(node.right):
+            # both children linked red. Pass red up the tree.
+            node.filp_color()
 
         node.N = self.node_size(node.left) + self.node_size(node.right) + 1
         return node
+
+
+    def rotate_right(self, h):
+        x = h.left
+        h.left = x.right
+        x.right = h
+        x.color = h.color
+        h.color_red()
+        x.N = h.N
+        h.N = self.node_size(h.left) + self.node_size(h.right) + 1
+        return x
+
+    def rotate_left(self, h):
+        x = h.right
+        h.right = x.left
+        x.left = h
+        x.color = h.color
+        h.color_red()
+        x.N = h.N
+        h.N = self.node_size(h.left) + self.node_size(h.right) + 1
+        return x
 
     def get(self, key):
         return self.get_node(self.root, key)
@@ -158,7 +209,7 @@ class BST(st.ST):
 
 
 
-#frequencyCounter.main(BST)
+frequencyCounter.main(BST)
 #
 # bst = BST()
 # bst.put('A', 1)
@@ -187,5 +238,5 @@ bst.put('p',10)
 bst.put('l',11)
 bst.put('e',12)
 
-for key in bst.range_root('f', 't'):
-    print(key.key, key.value)
+for node in bst.keys():
+    print(node.key)
